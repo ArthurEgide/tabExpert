@@ -37,7 +37,7 @@ public class matriz {
 		System.out.print("Digite a musica >"); // Input do usuário
 //		 String musicaSC = sc.nextLine(); // AutoTeste sem GP
 //		String musicaSC = "shape of you"; // AutoTeste com Gp
-		 String musicaSC = "patience";
+		 String musicaSC = "welcome to the jungle";
 
 		String cantor = cantorSC.replaceAll(" ", "-");
 		String musica = musicaSC.replaceAll(" ", "-");
@@ -257,10 +257,9 @@ public class matriz {
 
 		System.out.println("Iniciando ");
 
-		
 		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
 		
-		if(checkLinks.length <= 0) {							// Se não houver versão guitar pro
+		if(!(checkLinks[1].contains("/ajax"))) {							// Se não houver versão guitar pro
 			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
 			String[] handled = textHandler(checkLinks);
 		}
@@ -273,11 +272,11 @@ public class matriz {
 //		print(handled);
 
 		System.out.println();
-		if (checkLinks.length > 0) {
-			download(versoes, nomes);
-		} else if (checkLinks[0] == null) {
-//			download(handled);
+		if(!(checkLinks[1].contains("/ajax"))) {
 			System.out.println("Falta handled");
+		} else{
+			download(versoes, nomes);
+//			download(handled);
 			// }
 		}
 	}
