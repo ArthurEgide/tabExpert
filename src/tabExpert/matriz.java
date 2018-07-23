@@ -29,25 +29,28 @@ public class matriz {
 		 * Pares = nomes Impares = links. (0Nome+1Link) (2Nome+3Link) (4Nome+5Link)
 		 */
 		
-//		System.out.print("Digite a banda >");
-		// String cantorSC = sc.nextLine(); // Input do usuário
-		String cantorSC = "ed sheeran"; // AutoTeste sem GP
-//		 String cantorSC = "guns n roses"; // AutoTeste com GP
+		System.out.print("Digite a banda >");
+		if(cantor.isEmpty()) {
+			
+			 String cantorSC = sc.nextLine(); // Input do usuário
+//				String cantorSC = "ed sheeran"; // AutoTeste sem GP
+//				 String cantorSC = "guns n roses"; // AutoTeste com GP
 
-		System.out.print("Digite a musica >"); // Input do usuário
-//		 String musicaSC = sc.nextLine(); // AutoTeste sem GP
-		String musicaSC = "shape of you"; // AutoTeste com Gp
-//		 String musicaSC = "welcome to the jungle";
+				System.out.print("Digite a musica >"); // Input do usuário
+				 String musicaSC = sc.nextLine(); // AutoTeste sem GP
+//				String musicaSC = "shape of you"; // AutoTeste com Gp
+//				 String musicaSC = "welcome to the jungle";
+					String cantor = cantorSC.replaceAll(" ", "-");
+					String musica = musicaSC.replaceAll(" ", "-");
+					
 
-		String cantor = cantorSC.replaceAll(" ", "-");
-		String musica = musicaSC.replaceAll(" ", "-");
 
-		
+					matriz.cantor = cantor;
+					matriz.musica = musica;
+		}
+
 		String complementoNoGP = cantor + "/" + musica + "/";
 		String complementoGP = cantor + "/" + musica + "/" + "guitarpro" + "/";
-
-		matriz.cantor = cantor;
-		matriz.musica = musica;
 
 		URL siteFull;
 		if(noGP) {
