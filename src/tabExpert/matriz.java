@@ -156,7 +156,7 @@ public class matriz {
 		System.out.println("Fazendo download ");
 		String titulo = cantor + "-" + musica;
 
-		File file = new File("GP\\" + titulo + "(# lineIN #)." + "txt");
+		File file = new File("GP\\" + titulo + "(# line IN #)." + "txt");
 		file.createNewFile();
 
 		BufferedWriter bw = null;
