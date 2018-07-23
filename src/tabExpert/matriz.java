@@ -75,7 +75,7 @@ public class matriz {
 				in.close();
 				sr.close();
 				con.disconnect();
-				System.out.println("Nï¿½o tem uma versï¿½o Guitar Pro!");
+				System.out.println("Não tem uma versão Guitar Pro!");
 				return fullPag.toArray(new String[fullPag.size()]);
 			} else {
 
