@@ -29,15 +29,15 @@ public class matriz {
 		 * Pares = nomes Impares = links. (0Nome+1Link) (2Nome+3Link) (4Nome+5Link)
 		 */
 		
-		System.out.print("Digite a banda >");
+//		System.out.print("Digite a banda >");
 		// String cantorSC = sc.nextLine(); // Input do usuário
-//		String cantorSC = "ed sheeran"; // AutoTeste sem GP
-		 String cantorSC = "guns n roses"; // AutoTeste com GP
+		String cantorSC = "ed sheeran"; // AutoTeste sem GP
+//		 String cantorSC = "guns n roses"; // AutoTeste com GP
 
 		System.out.print("Digite a musica >"); // Input do usuário
 //		 String musicaSC = sc.nextLine(); // AutoTeste sem GP
-//		String musicaSC = "shape of you"; // AutoTeste com Gp
-		 String musicaSC = "welcome to the jungle";
+		String musicaSC = "shape of you"; // AutoTeste com Gp
+//		 String musicaSC = "welcome to the jungle";
 
 		String cantor = cantorSC.replaceAll(" ", "-");
 		String musica = musicaSC.replaceAll(" ", "-");
@@ -97,11 +97,6 @@ public class matriz {
 					in.close();
 					sr.close();
 					con.disconnect();
-					System.out.println("Não tem uma versão Guitar Pro!");
-					in.close();
-					sr.close();
-					con.disconnect();
-//					checkLinks(linkMusic(true));
 					return fullPag.toArray(new String[fullPag.size()]);
 				}
 			in.close();
@@ -170,7 +165,6 @@ public class matriz {
 	}
 
 	static void download(String[] linhas) throws IOException {
-		System.out.println("Fazendo download ");
 		String titulo = cantor + "-" + musica;
 
 		File file = new File("GP\\" + titulo + "(# line IN #)." + "txt");
@@ -186,7 +180,7 @@ public class matriz {
 
 			for (int contador = 0; contador < linhas.length; contador++) {
 				bw.write(linhas[contador]);
-				bw.write("");
+				bw.newLine();
 			}
 
 		} catch (IOException e) {
@@ -203,7 +197,7 @@ public class matriz {
 				ex.printStackTrace();
 			}
 		}
-		System.out.println("Download concluído com sucesso!");
+		System.out.println("Arquivo escrito com sucesso!");
 	}
 
 	static String[] textHandler(String[] sourceHtml) {
@@ -259,25 +253,15 @@ public class matriz {
 
 		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
 		
-		if(!(checkLinks[1].contains("/ajax"))) {							// Se não houver versão guitar pro
+		if(checkLinks[1].contains("/ajax")) {							// Se não houver versão guitar pro
+			String[] nomes = nomeVersoes(checkLinks);
+			URL[] versoes = versoes(checkLinks);
+			download(versoes, nomes);
+		}else {
 			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
 			String[] handled = textHandler(checkLinks);
-		}
-		
-
-		String[] nomes = nomeVersoes(checkLinks);
-
-		URL[] versoes = versoes(checkLinks);
-
-//		print(handled);
-
-		System.out.println();
-		if(!(checkLinks[1].contains("/ajax"))) {
-			System.out.println("Falta handled");
-		} else{
-			download(versoes, nomes);
-//			download(handled);
-			// }
+			print(handled);
+			download(handled);
 		}
 	}
 }
