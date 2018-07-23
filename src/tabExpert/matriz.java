@@ -104,7 +104,7 @@ public class matriz {
 		System.out.println("Encontrei as seguintes vers�es :)");
 
 		for (int i = 0; i < checkLinks.length; i++) {
-			String[] corte = checkLinks[i].replaceAll("Versão", "Vers�o").toString().split("<span>");
+			String[] corte = checkLinks[i].replaceAll("Versão", "Vers�o").toString().split("<span>");
 			for (int p = 0; p < corte.length; p++) {
 				if (p == 1) {
 					System.out.println(++counter + " - " + corte[p].replaceAll("</span>", ""));
