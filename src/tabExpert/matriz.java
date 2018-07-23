@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.logging.Handler;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -28,12 +29,14 @@ public class matriz {
 		 * Pares = nomes Impares = links. (0Nome+1Link) (2Nome+3Link) (4Nome+5Link)
 		 */
 		System.out.print("Digite a banda >");
-		String cantorSC = sc.nextLine();
-//		String cantorSC = "gabriela rocha";
+//		String cantorSC = sc.nextLine();		// Input do usuário
+		String cantorSC = "ed sheeran";			// AutoTeste sem GP
+//		String cantorSC = "guns n roses";		// AutoTeste com GP
 
-		System.out.print("Digite a musica >");
-		String musicaSC = sc.nextLine();
-//		String musicaSC = "eu navegarei";
+		System.out.print("Digite a musica >");	// Input do usuário
+//		String musicaSC = sc.nextLine();		// AutoTeste sem GP
+		String musicaSC = "shape of you";		// AutoTeste com Gp
+//		String musicaSC = "patience";
 
 		String cantor = cantorSC.replaceAll(" ", "-");
 		String musica = musicaSC.replaceAll(" ", "-");
@@ -193,16 +196,44 @@ public class matriz {
 
 //		System.out.println(sourceHtml.length);
 		System.out.println("Precisa priorizar aqui");
+		
 		String[] handled = new String[sourceHtml.length];
+		
+		List<String> corpo = new ArrayList<String>();
 
+		int contador = 0;
+		boolean cifra = false;
 		
 		
-		for (int i = 0; i < sourceHtml.length; i++) {
-			handled[i] = sourceHtml[i].replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
-					.replaceAll("</b>", "");
+		System.out.println("Começo do");
+		do {
+			if(sourceHtml[contador].contains("<pre>")) {
+				cifra = true;
+			}
+				
+			if(cifra) {
+				corpo.add(sourceHtml[contador]); //Adicionando na lista letra e cifra.
+			}
+			
+			contador++;
+		}while( !(sourceHtml[contador].contains("</pre>")) );
+		System.out.println("Fim do");
+		
+		for(int i = 0; i < corpo.toArray().length ; i++) {
+			System.out.println("LISTA CORPO > " + ((String) corpo.toArray()[i]).replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
+					.replaceAll("</b>", ""));
+		}
+			
+		
+		
+		
+		
+//		for (int i = 0; i < sourceHtml.length; i++) {
+//			handled[i] = sourceHtml[i].replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
+//					.replaceAll("</b>", "");
 //			System.out.println(handled[i]);
 
-		}
+//		}
 
 		System.out.println("Precisa priorizar aqui");
 		return handled;
