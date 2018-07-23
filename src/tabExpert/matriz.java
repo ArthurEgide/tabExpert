@@ -29,14 +29,14 @@ public class matriz {
 		 * Pares = nomes Impares = links. (0Nome+1Link) (2Nome+3Link) (4Nome+5Link)
 		 */
 		System.out.print("Digite a banda >");
-//		String cantorSC = sc.nextLine();		// Input do usuário
-		String cantorSC = "ed sheeran";			// AutoTeste sem GP
-//		String cantorSC = "guns n roses";		// AutoTeste com GP
+		// String cantorSC = sc.nextLine(); // Input do usuário
+		String cantorSC = "ed sheeran"; // AutoTeste sem GP
+		// String cantorSC = "guns n roses"; // AutoTeste com GP
 
-		System.out.print("Digite a musica >");	// Input do usuário
-//		String musicaSC = sc.nextLine();		// AutoTeste sem GP
-		String musicaSC = "shape of you";		// AutoTeste com Gp
-//		String musicaSC = "patience";
+		System.out.print("Digite a musica >"); // Input do usuário
+		// String musicaSC = sc.nextLine(); // AutoTeste sem GP
+		String musicaSC = "shape of you"; // AutoTeste com Gp
+		// String musicaSC = "patience";
 
 		String cantor = cantorSC.replaceAll(" ", "-");
 		String musica = musicaSC.replaceAll(" ", "-");
@@ -194,60 +194,57 @@ public class matriz {
 
 	static String[] textHandler(String[] sourceHtml) {
 
-//		System.out.println(sourceHtml.length);
+		// System.out.println(sourceHtml.length);
 		System.out.println("Precisa priorizar aqui");
-		
-		String[] handled = new String[sourceHtml.length];
-		
+
 		List<String> corpo = new ArrayList<String>();
 
 		int contador = 0;
 		boolean cifra = false;
-		
-		
-		System.out.println("Começo do");
+
 		do {
-			if(sourceHtml[contador].contains("<pre>")) {
+			if (sourceHtml[contador].contains("<pre>")) {
 				cifra = true;
 			}
-				
-			if(cifra) {
-				corpo.add(sourceHtml[contador]); //Adicionando na lista letra e cifra.
+
+			if (cifra) {
+				corpo.add(sourceHtml[contador]); // Adicionando na lista letra e cifra.
 			}
-			
+
 			contador++;
-		}while( !(sourceHtml[contador].contains("</pre>")) );
-		System.out.println("Fim do");
-		
-		for(int i = 0; i < corpo.toArray().length ; i++) {
-			System.out.println("LISTA CORPO > " + ((String) corpo.toArray()[i]).replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
-					.replaceAll("</b>", ""));
+		} while (!(sourceHtml[contador].contains("</pre>")));
+
+		String[] handled = new String[corpo.size()];
+
+		for (int i = 0; i < corpo.toArray().length; i++) {
+			if (((String) corpo.toArray()[i]).contains("<pre>")) {
+				handled[i] = (((String) corpo.toArray()[i])
+						.replaceAll("<u>", "")
+						.replaceAll("<span class=\"tablatura\"><span class=\"cnt\">","")
+						.replaceAll("</u>", "").replaceAll("<b>", "").replaceAll("</span>", "")
+						.replaceAll("</b>", ""))
+						.split("<pre>")[1];
+			} else {
+				handled[i] = (((String) corpo.toArray()[i]).replaceAll("<u>", "")
+						.replaceAll("<span class=\"tablatura\"><span class=\"cnt\">","")
+						.replaceAll("</u>", "").replaceAll("<b>", "")
+						.replaceAll("</span>", "")
+						.replaceAll("</b>", ""));
+				}
 		}
-			
-		
-		
-		
-		
-//		for (int i = 0; i < sourceHtml.length; i++) {
-//			handled[i] = sourceHtml[i].replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
-//					.replaceAll("</b>", "");
-//			System.out.println(handled[i]);
-
-//		}
-
 		System.out.println("Precisa priorizar aqui");
 		return handled;
 	}
 
 	static void noGP(String[] handledText) throws IOException {
 
-//		System.out.println(handledText.length);
+		// System.out.println(handledText.length);
 		String padrao_2 = "<pre>";
 		String padrao_3 = "</pre>";
 
 		int pad_2 = 0, pad_3 = 0;
 
-//		System.out.println(handledText.length);
+		// System.out.println(handledText.length);
 
 		List<String> primeira = new ArrayList<>();
 
@@ -255,12 +252,12 @@ public class matriz {
 
 			if (handledText[i].contains(padrao_2)) {
 				pad_2 += i;
-//				System.out.println("padrï¿½o 2. Linha >" + pad_2);
+				// System.out.println("padrï¿½o 2. Linha >" + pad_2);
 			}
 
 			if (handledText[i].contains(padrao_3)) {
 				pad_3 += i;
-//				System.out.println("padrï¿½o 3. Linha >" + pad_3);
+				// System.out.println("padrï¿½o 3. Linha >" + pad_3);
 				break;
 			}
 		}
@@ -291,9 +288,9 @@ public class matriz {
 		System.out.println();
 		if (checkLinks.length > 0) {
 			download(versoes, nomes);
-		} else if(checkLinks[0] == null) {
+		} else if (checkLinks[0] == null) {
 			download(handled);
-//		}
+			// }
 		}
 	}
 }
