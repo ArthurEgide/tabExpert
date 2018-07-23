@@ -30,7 +30,7 @@ public class matriz {
 		 */
 		
 		System.out.print("Digite a banda >");
-		if(cantor.isEmpty()) {
+		if(cantor.isEmpty()) {	// Anti Spam
 			
 			 String cantorSC = sc.nextLine(); // Input do usuário
 //				String cantorSC = "ed sheeran"; // AutoTeste sem GP
@@ -42,8 +42,6 @@ public class matriz {
 //				 String musicaSC = "welcome to the jungle";
 					String cantor = cantorSC.replaceAll(" ", "-");
 					String musica = musicaSC.replaceAll(" ", "-");
-					
-
 
 					matriz.cantor = cantor;
 					matriz.musica = musica;
