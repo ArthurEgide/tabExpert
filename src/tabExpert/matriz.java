@@ -186,7 +186,7 @@ public class matriz {
 				ex.printStackTrace();
 			}
 		}
-		System.out.println("Download concluï¿½do com sucesso!");
+		System.out.println("Download concluído com sucesso!");
 	}
 
 	static String[] textHandler(String[] sourceHtml) {
