@@ -24,29 +24,40 @@ public class matriz {
 	static String cantor = "";
 	static String musica = "";
 
-	static URL linkMusic() throws MalformedURLException {
+	static URL linkMusic(boolean noGP) throws MalformedURLException {
 		/*
 		 * Pares = nomes Impares = links. (0Nome+1Link) (2Nome+3Link) (4Nome+5Link)
 		 */
+		
 		System.out.print("Digite a banda >");
 		// String cantorSC = sc.nextLine(); // Input do usuário
-		String cantorSC = "ed sheeran"; // AutoTeste sem GP
-		// String cantorSC = "guns n roses"; // AutoTeste com GP
+//		String cantorSC = "ed sheeran"; // AutoTeste sem GP
+		 String cantorSC = "guns n roses"; // AutoTeste com GP
 
 		System.out.print("Digite a musica >"); // Input do usuário
-		// String musicaSC = sc.nextLine(); // AutoTeste sem GP
-		String musicaSC = "shape of you"; // AutoTeste com Gp
-		// String musicaSC = "patience";
+//		 String musicaSC = sc.nextLine(); // AutoTeste sem GP
+//		String musicaSC = "shape of you"; // AutoTeste com Gp
+		 String musicaSC = "patience";
 
 		String cantor = cantorSC.replaceAll(" ", "-");
 		String musica = musicaSC.replaceAll(" ", "-");
 
-		String complemento = cantor + "/" + musica + "/" + "guitarpro" + "/";
+		
+		String complementoNoGP = cantor + "/" + musica + "/";
+		String complementoGP = cantor + "/" + musica + "/" + "guitarpro" + "/";
 
 		matriz.cantor = cantor;
 		matriz.musica = musica;
 
-		URL siteFull = new URL(cc + complemento);
+		URL siteFull;
+		if(noGP) {
+			siteFull = new URL(cc + complementoNoGP);
+		}else {
+			siteFull = new URL(cc + complementoGP);
+		}
+		
+		
+		
 		return siteFull;
 	}
 
@@ -74,14 +85,6 @@ public class matriz {
 				inputLine = in.readLine();
 			}
 
-			if (link.isEmpty()) {
-				in.close();
-				sr.close();
-				con.disconnect();
-				System.out.println("Não tem uma versão Guitar Pro!");
-				return fullPag.toArray(new String[fullPag.size()]);
-			} else {
-
 				links = link.split("\"");
 				for (int i = 0; i < links.length; i++) {
 					if (links[i].contains("ajax")) {
@@ -89,7 +92,18 @@ public class matriz {
 						arquivos.add(links[i]);
 					}
 				}
-			}
+				
+				if (links[0].isEmpty()) {
+					in.close();
+					sr.close();
+					con.disconnect();
+					System.out.println("Não tem uma versão Guitar Pro!");
+					in.close();
+					sr.close();
+					con.disconnect();
+//					checkLinks(linkMusic(true));
+					return fullPag.toArray(new String[fullPag.size()]);
+				}
 			in.close();
 			sr.close();
 			con.disconnect();
@@ -152,7 +166,7 @@ public class matriz {
 			fos.close();
 		}
 
-		System.out.println("Download concluï¿½do com sucesso!");
+		System.out.println("Download concluído com sucesso!");
 	}
 
 	static void download(String[] linhas) throws IOException {
@@ -194,29 +208,25 @@ public class matriz {
 
 	static String[] textHandler(String[] sourceHtml) {
 
-		// System.out.println(sourceHtml.length);
-		System.out.println("Precisa priorizar aqui");
-
 		List<String> corpo = new ArrayList<String>();
 
 		int contador = 0;
-		boolean cifra = false;
+		boolean cifra = false; // Checa se começou a parte da cifra + letra
 
 		do {
 			if (sourceHtml[contador].contains("<pre>")) {
 				cifra = true;
 			}
-
 			if (cifra) {
-				corpo.add(sourceHtml[contador]); // Adicionando na lista letra e cifra.
+				corpo.add(sourceHtml[contador]); // Adiciona à lista apenas as linhas com cifra e letra.
 			}
 
 			contador++;
-		} while (!(sourceHtml[contador].contains("</pre>")));
+		} while (!(sourceHtml[contador].contains("</pre>"))); // Checa se terminou a parte da cifra + letra
 
 		String[] handled = new String[corpo.size()];
 
-		for (int i = 0; i < corpo.toArray().length; i++) {
+		for (int i = 0; i < corpo.toArray().length; i++) {		// Remove tudo que não é letra e/ou cifra.
 			if (((String) corpo.toArray()[i]).contains("<pre>")) {
 				handled[i] = (((String) corpo.toArray()[i])
 						.replaceAll("<u>", "")
@@ -232,40 +242,14 @@ public class matriz {
 						.replaceAll("</b>", ""));
 				}
 		}
-		System.out.println("Precisa priorizar aqui");
 		return handled;
 	}
 
-	static void noGP(String[] handledText) throws IOException {
+	static void print(String[] handledText) throws IOException {
 
-		// System.out.println(handledText.length);
-		String padrao_2 = "<pre>";
-		String padrao_3 = "</pre>";
-
-		int pad_2 = 0, pad_3 = 0;
-
-		// System.out.println(handledText.length);
-
-		List<String> primeira = new ArrayList<>();
 
 		for (int i = 0; i < handledText.length; i++) {
-
-			if (handledText[i].contains(padrao_2)) {
-				pad_2 += i;
-				// System.out.println("padrï¿½o 2. Linha >" + pad_2);
-			}
-
-			if (handledText[i].contains(padrao_3)) {
-				pad_3 += i;
-				// System.out.println("padrï¿½o 3. Linha >" + pad_3);
-				break;
-			}
-		}
-
-		for (int i = pad_2; i < pad_3; i++) {
-
 			System.out.println(handledText[i]);
-
 		}
 	}
 
@@ -273,23 +257,27 @@ public class matriz {
 
 		System.out.println("Iniciando ");
 
-		URL linkMusic = linkMusic();
-
-		String[] checkLinks = checkLinks(linkMusic);
+		
+		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
+		
+		if(checkLinks.length <= 0) {							// Se não houver versão guitar pro
+			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
+			String[] handled = textHandler(checkLinks);
+		}
+		
 
 		String[] nomes = nomeVersoes(checkLinks);
 
 		URL[] versoes = versoes(checkLinks);
 
-		String[] handled = textHandler(checkLinks);
-
-		noGP(handled);
+//		print(handled);
 
 		System.out.println();
 		if (checkLinks.length > 0) {
 			download(versoes, nomes);
 		} else if (checkLinks[0] == null) {
-			download(handled);
+//			download(handled);
+			System.out.println("Falta handled");
 			// }
 		}
 	}
