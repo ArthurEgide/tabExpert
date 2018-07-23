@@ -192,8 +192,11 @@ public class matriz {
 	static String[] textHandler(String[] sourceHtml) {
 
 //		System.out.println(sourceHtml.length);
+		System.out.println("Precisa priorizar aqui");
 		String[] handled = new String[sourceHtml.length];
 
+		
+		
 		for (int i = 0; i < sourceHtml.length; i++) {
 			handled[i] = sourceHtml[i].replaceAll("<u>", "").replaceAll("</u>", "").replaceAll("<b>", "")
 					.replaceAll("</b>", "");
@@ -201,6 +204,7 @@ public class matriz {
 
 		}
 
+		System.out.println("Precisa priorizar aqui");
 		return handled;
 	}
 
