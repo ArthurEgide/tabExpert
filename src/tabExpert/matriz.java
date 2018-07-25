@@ -254,35 +254,23 @@ public class matriz {
 
 		System.out.println("Iniciando ");
 
-		Musica primeira = new Musica("seu jorge","burguesinha");
-		Musica segunda = new Musica("the stroker","reptlia");
+//		Musica primeira = new Musica("seu jorge","burguesinha");
+//		Musica segunda = new Musica("the stroker","reptlia");
 		
-		primeira.print();
-		segunda.print();
+//		primeira.print();
+//		segunda.print();
 		
+		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
-//		
-//		if(checkLinks[1].contains("/ajax")) {							// Se houver versão guitar pro
-//			String[] nomes = nomeVersoes(checkLinks);
-//			URL[] versoes = versoes(checkLinks);
-//			download(versoes, nomes);
-//		}else {
-//			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
-//			String[] handled = textHandler(checkLinks);
-//			print(handled);
-//			download(handled);
-//		}
+		if(checkLinks[1].contains("/ajax")) {							// Se houver versão guitar pro
+			String[] nomes = nomeVersoes(checkLinks);
+			URL[] versoes = versoes(checkLinks);
+			download(versoes, nomes);
+		}else {
+			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
+			String[] handled = textHandler(checkLinks);
+			print(handled);
+			download(handled);
+		}
 	}
 }
