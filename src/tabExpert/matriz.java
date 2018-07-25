@@ -75,13 +75,15 @@ public class matriz {
 			InputStreamReader sr = new InputStreamReader(con.getInputStream());
 			BufferedReader in = new BufferedReader(sr);
 			String find = "/ajax";
-			String inputLine = in.readLine(); // Pula linhas.
 			String link = "";
+			
+			String inputLine = in.readLine(); // Pula linhas.
+			
 			while (in.ready()) {
 				if (inputLine.contains(find)) {
 					link = inputLine;
 				}
-
+				
 				fullPag.add(inputLine);
 				inputLine = in.readLine();
 			}
@@ -252,17 +254,35 @@ public class matriz {
 
 		System.out.println("Iniciando ");
 
-		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
+		Musica primeira = new Musica("seu jorge","burguesinha");
+		Musica segunda = new Musica("the stroker","reptlia");
 		
-		if(checkLinks[1].contains("/ajax")) {							// Se não houver versão guitar pro
-			String[] nomes = nomeVersoes(checkLinks);
-			URL[] versoes = versoes(checkLinks);
-			download(versoes, nomes);
-		}else {
-			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
-			String[] handled = textHandler(checkLinks);
-			print(handled);
-			download(handled);
-		}
+		primeira.print();
+		segunda.print();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+//		String[] checkLinks = checkLinks(linkMusic(false));		// Primeiro Scan.
+//		
+//		if(checkLinks[1].contains("/ajax")) {							// Se houver versão guitar pro
+//			String[] nomes = nomeVersoes(checkLinks);
+//			URL[] versoes = versoes(checkLinks);
+//			download(versoes, nomes);
+//		}else {
+//			checkLinks = checkLinks(linkMusic(true));			// Scan alternativo
+//			String[] handled = textHandler(checkLinks);
+//			print(handled);
+//			download(handled);
+//		}
 	}
 }
