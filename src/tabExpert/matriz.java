@@ -170,7 +170,7 @@ public class matriz {
 	static void download(String[] linhas) throws IOException {
 		String titulo = cantor + "-" + musica;
 
-		File file = new File("GP\\" + titulo + "(# line IN #)." + "txt");
+		File file = new File("GP\\" + titulo + "# line IN #." + "txt");
 		file.createNewFile();
 
 		BufferedWriter bw = null;

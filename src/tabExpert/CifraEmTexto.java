@@ -2,8 +2,11 @@ package tabExpert;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FilenameFilter;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextArea;
 
@@ -13,18 +16,15 @@ public class CifraEmTexto {
 		return "Ola,estou aqui e funciono";
 	}
 	
-	public String tala() {
-		if(this.file.exists()) {
-			return "Ta mesmo";
-		}else{
-			return "Ta nada";
-		}
-	}
 
-	public void lerMusica(JTextArea txtpnFullmusic){
+	public void lerMusica(JTextArea txtpnFullmusic,String musica){
 
+//		String selected = jList1.getSelectedValue();
+		
+		
+		
 		try{
-	        FileInputStream fstream = new FileInputStream("GP/matanza-tempo-ruim(# line IN #).txt");
+	        FileInputStream fstream = new FileInputStream("GP/" + musica);
 	        // do not use DataInputStream to read text
 	        // DataInputStream in = new DataInputStream(fstream);
 	        Reader reader = new InputStreamReader(fstream);
@@ -34,8 +34,21 @@ public class CifraEmTexto {
 		
 	}
 	
+	public String[] getCifras() {
+		File diretorio = new File("GP/");
+		String[] todosArquivos = diretorio.list();
+		List<String> selecionados = new ArrayList<>();
+		for(int i = 0; i < todosArquivos.length ; i++) {
+			if(todosArquivos[i].contains("# line IN #")) {
+				selecionados.add(todosArquivos[i]);
+			}
+			
+		}
+		
+		return selecionados.toArray(new String[selecionados.size()]);
+	}
 	
-	File file = new File("GP/ed-sheeran-shape-of-you(# line IN #).txt");
+	
 	
 	
 }
