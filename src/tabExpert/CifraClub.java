@@ -69,7 +69,7 @@ public class CifraClub extends Site{
 		return fullPag.toArray(new String[fullPag.size()]);
 	}
 
-	void cifraClub(Boolean noGP) throws MalformedURLEx'ception {
+	void cifraClub(Boolean noGP) throws MalformedURLException {
 
 		// Implementação de todos os métodos da void main responsaveis pelo
 		// download com o provedor Cifra Club
@@ -154,11 +154,14 @@ public class CifraClub extends Site{
 		// download()
 		// Começar daqui.
 		
+		String[] versions = versoes.toArray(new String[versoes.size()]);
+		
 		System.out.println("Fazendo download ");
-		String titulo = cantor + "-" + musica;
-
+		versoes.toArray(new String[versoes.size()]);
+		
 		for (int i = 1, q = 0; i < links.length; i += 2, q++) {
-			File file = new File("GP\\" + titulo + "(" + versoes[q] + ")."
+			
+			File file = new File("GP\\" + titulo + "(" + versions[q] + ")."
 					+ links[i].toString().substring((links[i].toString().length() - 3), links[i].toString().length()));
 
 			InputStream is = links[i].openStream();

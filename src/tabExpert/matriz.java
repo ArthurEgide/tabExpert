@@ -116,7 +116,7 @@ public class matriz {
 		int counter = 0;
 		List<String> versoes = new ArrayList<>();
 		System.out.println("Boas novas...");
-		System.out.println("Encontrei as seguintes versï¿½es :)");
+		System.out.println("Encontrei as seguintes versões :)");
 
 		for (int i = 0; i < checkLinks.length; i++) {
 			String[] corte = checkLinks[i].replaceAll("VersÃ£o", "Versão").toString().split("<span>");
@@ -152,12 +152,12 @@ public class matriz {
 			File file = new File("GP\\" + titulo + "(" + versoes[q] + ")."
 					+ links[i].toString().substring((links[i].toString().length() - 3), links[i].toString().length()));
 
-			InputStream is = links[i].openStream();
+			InputStream is = links[i].openStream();	//Importação de todos os bytes do arquivo GP
 			FileOutputStream fos = new FileOutputStream(file);
 
 			int bytes = 0;
 
-			while ((bytes = is.read()) != -1) {
+			while ((bytes = is.read()) != -1) {	// Cópia dos bytes para o arquivo interno
 				fos.write(bytes);
 			}
 			is.close();
