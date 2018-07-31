@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
@@ -65,11 +66,24 @@ public class FirstGUI {
 		JButton btnMudarversao = new JButton("mudarVersao");
 		JButton btnMudarmusica = new JButton("mudarMusica");
 		JPanel panel = new JPanel();
-		JTextPane txtpnAcordesfuturos = new JTextPane();
 		JPanel panel_3 = new JPanel();
 		Panel musicFull = new Panel();
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
+		
+		JPanel jpanListaArquivos = new JPanel();
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
+		JList<String> list;
+		
+		
+		
+		gl_panel_3.setHorizontalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addComponent(jpanListaArquivos, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+		);
+		gl_panel_3.setVerticalGroup(
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addComponent(jpanListaArquivos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+		);
 
 		
 		JTextArea txtpnFullmusic = new JTextArea();
@@ -128,11 +142,17 @@ public class FirstGUI {
 		txtpnAcordeAtual.setText("Acordes Atuais");
 		panel_1.setLayout(gl_panel_1);
 		
+		String[] nameList = cet.getCifras();
+        list = new JList(nameList);
+        jpanListaArquivos.add(list);
+        jpanListaArquivos.setVisible(true);
+		
+		
 		btnMudarversao.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				txtpnAcordeAtual.setText("Mudei xD");
-				cet.lerMusica(txtpnFullmusic);
+				cet.lerMusica(txtpnFullmusic , list.getSelectedValue().toString());
 				
 			}
 			
@@ -141,27 +161,36 @@ public class FirstGUI {
 		btnMudarmusica.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
-				txtpnFullmusic.setText(cet.tala());
+				JOptionPane.showMessageDialog(null, "Fui clicado");
 			}
 			
 		});
 		frame.getContentPane().add(panel_3, BorderLayout.EAST);
-		
-		txtpnAcordesfuturos.setText("acordesFuturos");
-		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtpnAcordesfuturos, GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
-		);
-		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addComponent(txtpnAcordesfuturos, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-		);
 		panel_3.setLayout(gl_panel_3);
 		
 		frame.getContentPane().add(musicFull, BorderLayout.CENTER);
 		musicFull.setLayout(gl_musicFull);
 	    
+		
 
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 }
 	
