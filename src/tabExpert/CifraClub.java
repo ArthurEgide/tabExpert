@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class CifraClub extends Site{
+public class CifraClub{
 	
 	private String titulo;
 	private String autor;

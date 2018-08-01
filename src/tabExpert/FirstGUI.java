@@ -172,13 +172,6 @@ public class FirstGUI {
 		musicFull.setLayout(gl_musicFull);
 	    
 		
-
-
-		
-		
-		
-		
-		
 		
 		
 		
@@ -193,4 +186,3 @@ public class FirstGUI {
 		
 	}
 }
-	
